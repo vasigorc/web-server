@@ -1,0 +1,5 @@
+# dependencies directory
+node_modules/
+
+# course videos
+*.mp4
