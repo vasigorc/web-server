@@ -1,20 +1,26 @@
 const path = require('path')
 const express = require('express')
+// Lecture 49 Advanced Templating
+const hbs = require('hbs')
 
 const app = express()
 
 const publicDirectory = path.join(__dirname, '../public')
 
-// Lecture 47: Advanced templating
+// Lecture 46: Customizing the views directory
 // __dirname is the current folder, 2nd parameter is the path from there
-const viewsPath = path.join(__dirname, "../templates")
+const viewsPath = path.join(__dirname, "../templates/views")
+const partialsPath = path.join(__dirname, "../templates/partials")
 
-app.use(express.static(publicDirectory))
+// Lecture 49: make partial templates available to views
+hbs.registerPartials(partialsPath)
 
 // Setup handlebars engine and views location 
 app.set('view engine', 'hbs')
 app.set('views', viewsPath)
 
+// Setup static directory to serve
+app.use(express.static(publicDirectory))
 app.get('', (req, res) => {
     res.render('index', {
         title: 'Weather App',
@@ -36,11 +42,30 @@ app.get('/help', (req, res)=> {
     })
 })
 
+
 //app.com/weather
 app.get('/weather', (req, res) => {
     res.send({
         forecast: "Le temps est beau...",
         location: "Île-des-Soeurs"
+    })
+})
+
+app.get('/help/*', (req, res) => {
+    res.render('404', {
+        title: 'Not what you\'re looking for',
+        errorMessage: 'Help article not found',
+        name: 'Vasile Gorcinschi'
+    })
+})
+
+// 50 404 pages - it is mandatory that the 404 handler is last in the list
+// render anything that wasn't matched thus far
+app.get('*', (req, res)=> {
+    res.render('404', {
+        title: '404',
+        errorMessage: 'Page not found',
+        name: 'Vasile Gorcinschi'
     })
 })
 
