@@ -1,7 +1,57 @@
-h1 {
-    color: gray;
+body { 
+    /* text color*/
+    color: #333333;
+    font-family: Arial, Helvetica, sans-serif;
+    /* constraits how wide our content can be */
+    max-width: 650px;
+    /* now to center our content we need to set-up margins 
+        0 for top and bottom , auto evenly distributes space on lef and right */
+    margin: 0 auto;
+    /* same as above but this refers to space between margin and the element */
+    padding: 0 16px;
+
+    /* to enable flexbox */
+    display: flex;
+    /* to keep header, body nad footer stacked
+       and have flexbox enabled */
+    flex-direction: column;
+    /* 'vh' stends for viewport height, here it is set to 100% of vh */
+    min-height: 100vh;
 }
 
-img {
+.main-content {
+    /* one more flexbox style
+       allows an element to grow as to take as much space as it needs
+       1 means -> take all left over space*/
+    flex-grow: 1;
+}
+
+footer {
+    color: #888888;
+    /* width type color */
+    border-top: 1px solid #eeeeee;
+    padding: 16px 0;
+    margin-top: 16px;
+}
+
+header {
+    margin-top: 16px;
+    margin-bottom: 48px;
+}
+
+header a {
+    color: #888888;
+    /* space between each link */
+    margin-right: 16px;
+    text-decoration: none;
+}
+
+h1 {
+    font-size: 64px;
+    margin-bottom: 16px;
+}
+
+.portrait {
+    /* hight is adjusted evenly so that the image doesn't look skewed */
     width: 250px;
 }
