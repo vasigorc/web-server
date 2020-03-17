@@ -1,6 +1,7 @@
 const path = require('path')
 const express = require('express')
 const geocode = require('./utils/geocode')
+const forecast = require('./utils/forecast')
 
 // Lecture 49 Advanced Templating
 const hbs = require('hbs')
@@ -56,10 +57,18 @@ app.get('/weather', (req, res) => {
         })
     }
     
-    res.send({
-        forecast: "Le temps est beau...",
-        location: "Îles-des-Soeurs",
-        address: queryAddress
+    geocode(queryAddress, (error, data) => {
+        if (error) {
+            return res.status(500).send(errorr)
+        }
+
+        forecast(data, (error, forecastData) => {
+            if (error) {
+                return res.status(500).send(error)
+            }
+
+            return res.status(200).send(forecastData)
+        })
     })
 })
 
