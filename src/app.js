@@ -1,5 +1,7 @@
 const path = require('path')
 const express = require('express')
+const geocode = require('./utils/geocode')
+
 // Lecture 49 Advanced Templating
 const hbs = require('hbs')
 
@@ -46,9 +48,30 @@ app.get('/help', (req, res)=> {
 
 //app.com/weather
 app.get('/weather', (req, res) => {
+    const queryAddress = req.query.address
+
+    if (!queryAddress) {
+        return res.status(400).send({
+            error: "You must provide an address"
+        })
+    }
+    
     res.send({
         forecast: "Le temps est beau...",
-        location: "Île-des-Soeurs"
+        location: "Îles-des-Soeurs",
+        address: queryAddress
+    })
+})
+
+app.get('/products', (req, res) => {
+    if (!req.query.search) {
+        return res.status(400).send({
+            error: "You must provide a search parameter"
+        })
+    }
+    console.log(req.query)
+    res.send({
+        products: []
     })
 })
 
