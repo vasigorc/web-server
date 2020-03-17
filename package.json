@@ -12,6 +12,8 @@
   "dependencies": {
     "express": "^4.17.1",
     "hbs": "^4.1.0",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "handlebars": ">=4.3.0",
+    "lodash": ">=4.7.12"
   }
 }
