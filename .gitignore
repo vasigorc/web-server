@@ -3,3 +3,6 @@ node_modules/
 
 # course videos
 *.mp4
+
+#hide resources
+resources

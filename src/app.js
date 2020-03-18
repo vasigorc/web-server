@@ -59,7 +59,7 @@ app.get('/weather', (req, res) => {
     
     geocode(queryAddress, (error, data) => {
         if (error) {
-            return res.status(500).send(errorr)
+            return res.status(500).send(error)
         }
 
         forecast(data, (error, forecastData) => {
@@ -67,7 +67,11 @@ app.get('/weather', (req, res) => {
                 return res.status(500).send(error)
             }
 
-            return res.status(200).send(forecastData)
+            return res.status(200).send({
+                "address": queryAddress,
+                "location": data.location,
+                "forecast": forecastData
+            })
         })
     })
 })
