@@ -6,3 +6,6 @@ node_modules/
 
 #hide resources
 resources
+
+#hide playground folder
+playground
