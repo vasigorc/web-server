@@ -10,11 +10,11 @@ const geocode = (address, callback) => {
         const { message: errorMessage, features: results } = body
 
         if (error) {
-            callback('Impossible de se connecter à Map Service', undefined)
+            callback({error: 'Impossible de se connecter à Map Service'}, undefined)
         } else if (errorMessage) {
-            callback(`Erreur de recherche: ${errorMessage}`, undefined)
+            callback({error: `Erreur de recherche: ${errorMessage}`}, undefined)
         } else if (!results || !results.length) {
-            callback("Aucun résultat pour votre requête, veuillez vérifier votre terme de recherche.", undefined)
+            callback({error: "Aucun résultat pour votre requête, veuillez vérifier votre terme de recherche."}, undefined)
         } else {
             callback(undefined, {
                 latitude: results[0].center[1],
